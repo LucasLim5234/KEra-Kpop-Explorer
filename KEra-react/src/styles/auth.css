@@ -1,0 +1,206 @@
+/* Main container for side-by-side layout */
+.auth-container {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  height: 100vh;
+  /* Full viewport height */
+}
+
+/* Left side: background image */
+.auth-left {
+  flex: 1;
+  position: relative;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+
+/* Overlay effect for background dimming */
+.auth-left::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: inherit;
+  background-size: cover;
+  background-position: center;
+  filter: brightness(45%) blur(2px);
+  z-index: 0;
+}
+
+/* Title and subtitle */
+.auth-left-text {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding: 1rem;
+}
+
+.auth-left-text .auth-title {
+  font-size: 6rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, #ff6ec7, #8338ec, #3a86ff, #ff6ec7);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 8px rgba(255, 110, 199, 0.7),
+    0 0 20px rgba(131, 56, 236, 0.6),
+    0 0 30px rgba(58, 134, 255, 0.5);
+  animation: shimmer 3s infinite linear;
+  margin-bottom: 0.5rem;
+}
+
+.auth-left-text .auth-subtitle {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #fff;
+  text-shadow: 0 0 5px #ff6ec7, 0 0 10px #8338ec, 0 0 15px #3a86ff;
+  animation: shimmer 4s infinite linear;
+}
+
+/* Shimmer animation for text */
+@keyframes shimmer {
+  0% {
+    background-position: -500% 0;
+  }
+
+  100% {
+    background-position: 500% 0;
+  }
+}
+
+/* Right side: gradient background for the form */
+.auth-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 3rem;
+  background: linear-gradient(135deg, #ff3366, #9900ff);
+  color: #fff;
+  position: relative;
+}
+
+/* Form header styling */
+.auth-form-header {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.auth-form-header h2 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+
+.auth-form-header p {
+  font-size: 1rem;
+  color: #f0e6ff;
+}
+
+/* Auth card with form content */
+.auth-card {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+  color: #fff;
+  transition: all 0.3s ease;
+}
+
+/* Input fields styling */
+.auth-card input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.auth-card input::placeholder {
+  color: #c1c1c1;
+}
+
+/* Button styling */
+.auth-card button {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 8px;
+  background: #9900ff;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.auth-card button:hover {
+  background: #8100d7d2;
+  font-weight: 700;
+}
+
+/* Links styling */
+.auth-card a {
+  color: #f0e6ff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.auth-card a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1024px) {
+  .auth-container {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .auth-left {
+    height: 250px;
+  }
+
+  .auth-left-text {
+    padding: 1rem;
+  }
+
+  .auth-right {
+    width: 100%;
+    padding: 2rem;
+  }
+
+  .auth-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .auth-left-text .auth-title {
+    font-size: 2.5rem;
+  }
+
+  .auth-left-text .auth-subtitle {
+    font-size: 1rem;
+  }
+
+  .auth-form-header h2 {
+    font-size: 1.5rem;
+  }
+
+  .auth-form-header p {
+    font-size: 0.9rem;
+  }
+}
