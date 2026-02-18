@@ -7,8 +7,11 @@ import AuthGuard from "../pages/auth/AuthGuard";
 import GuestGuard from "../pages/auth/GuestGuard";
 import AuthLayout from "../layouts/AuthLayout";
 import UserLayout from "../layouts/UserLayout";
+
 import IdolIndex from "../pages/users/idols/IdolIndex";
 import FanIndex from "../pages/users/fans/FanIndex";
+import TourIndex from "../pages/users/tours/TourIndex";
+import TourGroupList from "../pages/users/tours/TourGroupList";
 
 export default function AppRoutes() {
   return (
@@ -22,10 +25,13 @@ export default function AppRoutes() {
         </Route>
       </Route>
 
+
       <Route path="/user" element={<AuthGuard role="user" />}>
         <Route element={<UserLayout />}>
           <Route path="idol-index" element={<IdolIndex />} />
           <Route path="fan-index" element={<FanIndex />} />
+          <Route path="tour-index" element={<TourIndex />} />
+          <Route path="tour-group/:groupName" element={<TourGroupList />} />
         </Route>
       </Route>
 

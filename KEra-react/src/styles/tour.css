@@ -1,0 +1,25 @@
+/* Custom styles for K-pop group and concert cards */
+.group-card:hover, .concert-card:hover {
+  box-shadow: 0 0 16px 4px #e83e8c33;
+  transform: translateY(-4px) scale(1.03);
+  transition: all 0.2s;
+}
+
+.group-card .card-title, .concert-card .card-title {
+  color: #e83e8c;
+}
+
+.group-card .card-img-top, .concert-card .card-img-top {
+  border-radius: 0.5rem 0.5rem 0 0;
+}
+
+@media (max-width: 576px) {
+  .group-card .card-img-top, .concert-card .card-img-top {
+    height: 140px !important;
+  }
+}
+
+body {
+  background: linear-gradient(135deg, #f8fafc 0%, #fceabb 100%);
+  min-height: 100vh;
+}
