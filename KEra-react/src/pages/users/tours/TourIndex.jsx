@@ -1,17 +1,26 @@
-import React, { useEffect, useState } from 'react';
-import { fetchKpopGroups } from '../../../api/tour';
-import { useNavigate } from 'react-router-dom';
-import { Container, Row, Col, Card, Form, InputGroup, Button, Badge } from 'react-bootstrap';
+import React, { useEffect, useState } from "react";
+import { fetchKpopGroups } from "../../../api/tour";
+import { useNavigate } from "react-router-dom";
+import {
+  Container,
+  Row,
+  Col,
+  Card,
+  Form,
+  InputGroup,
+  Button,
+  Badge,
+} from "react-bootstrap";
 
 export default function TourIndex() {
   const [groups, setGroups] = useState([]);
-  const [search, setSearch] = useState('');
+  const [search, setSearch] = useState("");
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
   useEffect(() => {
     setLoading(true);
-    fetchKpopGroups(search).then(data => {
+    fetchKpopGroups(search).then((data) => {
       setGroups(data);
       setLoading(false);
     });
@@ -25,36 +34,73 @@ export default function TourIndex() {
     <Container className="py-5">
       <div className="text-center mb-5">
         <h1 className="display-5 fw-bold gradient-text">K-Pop Concerts</h1>
-        <p className="lead">Discover your favourite idols and their upcoming concerts worldwide!</p>
+        <p className="lead">
+          Discover your favourite idols and their upcoming concerts worldwide!
+        </p>
       </div>
-      <InputGroup className="mb-5 w-75 mx-auto shadow-sm rounded-pill bg-white" style={{maxWidth:'500px'}}>
+      <InputGroup
+        className="mb-5 w-75 mx-auto shadow-sm rounded-pill bg-white"
+        style={{ maxWidth: "500px" }}
+      >
         <Form.Control
           className="border-0 rounded-pill ps-4"
           placeholder="Search K-pop groups..."
           value={search}
-          onChange={e => setSearch(e.target.value)}
-          style={{background:'transparent'}}
+          onChange={(e) => setSearch(e.target.value)}
+          style={{ background: "transparent" }}
         />
-        <Button variant="pink" className="rounded-pill px-4" onClick={() => setSearch(search)}>
+        <Button
+          variant="pink"
+          className="rounded-pill px-4"
+          onClick={() => setSearch(search)}
+        >
           <i className="bi bi-search"></i> Search
         </Button>
       </InputGroup>
       {loading ? (
-        <div className="text-center py-5"><div className="spinner-border text-pink" role="status"></div></div>
+        <div
+          className="d-flex justify-content-center align-items-center gap-3"
+          style={{ minHeight: "30vh" }}
+        >
+          <div className="spinner-grow text-primary" role="status"></div>
+          <div className="spinner-grow text-primary" role="status"></div>
+          <div className="spinner-grow text-primary" role="status"></div>
+        </div>
       ) : (
         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-          {groups.map(group => (
+          {groups.map((group) => (
             <Col key={group.id}>
-              <Card className="h-100 shadow-lg group-card border-0 position-relative overflow-hidden" onClick={() => handleGroupClick(group)} style={{ cursor: 'pointer', background: 'rgba(255,255,255,0.95)' }}>
+              <Card
+                className="h-100 shadow-lg group-card border-0 position-relative overflow-hidden"
+                onClick={() => handleGroupClick(group)}
+                style={{
+                  cursor: "pointer",
+                  background: "rgba(255,255,255,0.95)",
+                }}
+              >
                 <div className="group-img-wrapper">
-                  <Card.Img variant="top" src={group.image} alt={group.name} className="group-img" />
+                  <Card.Img
+                    variant="top"
+                    src={group.image}
+                    alt={group.name}
+                    className="group-img"
+                  />
                   <div className="group-img-overlay d-flex align-items-end p-2">
-                    <Badge bg="pink" className="fs-6 px-3 py-2 shadow">{group.name}</Badge>
+                    <Badge bg="pink" className="fs-6 px-3 py-2 shadow">
+                      {group.name}
+                    </Badge>
                   </div>
                 </div>
                 <Card.Body className="d-flex flex-column">
-                  <Card.Text className="text-muted small flex-grow-1">{group.description || 'No description available.'}</Card.Text>
-                  <Button variant="outline-pink" className="mt-2 w-100 rounded-pill">View Concerts</Button>
+                  <Card.Text className="text-muted small flex-grow-1">
+                    {group.description || "No description available."}
+                  </Card.Text>
+                  <Button
+                    variant="outline-pink"
+                    className="mt-2 w-100 rounded-pill"
+                  >
+                    View Concerts
+                  </Button>
                 </Card.Body>
               </Card>
             </Col>

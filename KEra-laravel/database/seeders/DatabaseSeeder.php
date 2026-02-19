@@ -17,12 +17,13 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
+        $this->call(IdolSeeder::class);
 
         User::create([
-            'name' => 'Admin',
-            'email' => 'admin@gmail.com',
+            'name' => 'user',
+            'email' => 'user@gmail.com',
             'password' => Hash::make("123456789"),
-            'role' => 'admin',
+            'role' => 'user',
         ]);
     }
 }
