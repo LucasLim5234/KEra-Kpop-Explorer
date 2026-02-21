@@ -8,11 +8,14 @@ import GuestGuard from "../pages/auth/GuestGuard";
 import AuthLayout from "../layouts/AuthLayout";
 import UserLayout from "../layouts/UserLayout";
 
+
 import FanIndex from "../pages/users/fans/FanIndex";
 import TourIndex from "../pages/users/tours/TourIndex";
 import TourGroupList from "../pages/users/tours/TourGroupList";
 import IdolIndex from "../pages/users/idols/IdolIndex";
 import IdolDetail from "../pages/users/idols/IdolDetail";
+import QuizIndex from "../pages/users/quizzes/QuizIndex";
+import QuizPlay from "../pages/users/quizzes/QuizPlay";
 
 export default function AppRoutes() {
   return (
@@ -34,6 +37,8 @@ export default function AppRoutes() {
           <Route path="fan-index" element={<FanIndex />} />
           <Route path="tour-index" element={<TourIndex />} />
           <Route path="tour-group/:groupName" element={<TourGroupList />} />
+          <Route path="quiz-index" element={<QuizIndex />} />
+          <Route path="quiz/:idolId" element={<QuizPlay />} />
         </Route>
       </Route>
 

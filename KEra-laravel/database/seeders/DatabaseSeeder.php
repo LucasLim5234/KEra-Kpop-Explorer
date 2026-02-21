@@ -17,7 +17,6 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         // User::factory(10)->create();
-        $this->call(IdolSeeder::class);
 
         User::create([
             'name' => 'user',
@@ -25,5 +24,8 @@ class DatabaseSeeder extends Seeder
             'password' => Hash::make("123456789"),
             'role' => 'user',
         ]);
+
+        $this->call(IdolSeeder::class);
+        $this->call(QuizSeeder::class);
     }
 }
