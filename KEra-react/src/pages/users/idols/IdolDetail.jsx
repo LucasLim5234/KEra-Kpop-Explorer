@@ -45,6 +45,7 @@ export default function IdolDetail() {
           <h1>{idol.name}</h1>
           <p className="idol-company">Company: {idol.company}</p>
           <p className="idol-year">Debut Year: {idol.debut_year}</p>
+          <br />
           <p className="idol-fandom">Fandom: {idol.fandom_name}</p>
           <p className="idol-desc">{idol.description}</p>
           <div className="idol-section">

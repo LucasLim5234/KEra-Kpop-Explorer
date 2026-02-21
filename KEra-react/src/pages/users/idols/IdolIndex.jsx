@@ -23,6 +23,7 @@ export default function IdolIndex() {
   useEffect(() => {
     setLoading(true);
     fetchIdols();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [company, debutYear]);
 
   const handleClick = (id) => {
@@ -30,10 +31,11 @@ export default function IdolIndex() {
   };
 
   return (
-    <div className="idol-index-container">
-      <h1 className="idol-title">K-Pop Idol Archive</h1>
+    <div>
+      <h1 className="idol-title">K-Pop Idol Profile</h1>
+      <p className="lead text-center mb-5">Get to know your bias. Explore the journey and milestones of your favorite idols!</p>
       <div className="idol-filters">
-        <select value={company} onChange={(e) => setCompany(e.target.value)}>
+        <select className="idol-theme-select" value={company} onChange={(e) => setCompany(e.target.value)}>
           <option value="">All Companies</option>
           {companies.map((c) => (
             <option key={c} value={c}>
@@ -41,11 +43,8 @@ export default function IdolIndex() {
             </option>
           ))}
         </select>
-        <select
-          value={debutYear}
-          onChange={(e) => setDebutYear(e.target.value)}
-        >
-          <option value="">All Debut Years</option>
+        <select className="idol-theme-select" value={debutYear} onChange={(e) => setDebutYear(e.target.value)}>
+          <option value="">All Years</option>
           {years.map((y) => (
             <option key={y} value={y}>
               {y}
@@ -54,13 +53,10 @@ export default function IdolIndex() {
         </select>
       </div>
       {loading ? (
-        <div
-          className="d-flex justify-content-center align-items-center gap-3"
-          style={{ minHeight: "40vh" }}
-        >
-          <div className="spinner-grow text-primary" role="status"></div>
-          <div className="spinner-grow text-primary" role="status"></div>
-          <div className="spinner-grow text-primary" role="status"></div>
+        <div className="idol-loading">
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
         </div>
       ) : (
         <div className="idol-list">
@@ -71,7 +67,7 @@ export default function IdolIndex() {
               onClick={() => handleClick(idol.id)}
             >
               <img
-                src={idol.thumbnail}
+                src={idol.thumbnail || "/default-idol.png"}
                 alt={idol.name}
                 className="idol-thumb"
                 onError={(e) => {
@@ -83,8 +79,8 @@ export default function IdolIndex() {
               />
               <div className="idol-info">
                 <h2>{idol.name}</h2>
-                <p className="idol-company">{idol.company}</p>
-                <p className="idol-year">Debut: {idol.debut_year}</p>
+                <div className="idol-company">{idol.company}</div>
+                <div className="idol-year">Debut: {idol.debut_year}</div>
               </div>
             </div>
           ))}

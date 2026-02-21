@@ -18,11 +18,14 @@ export default function QuizIndex() {
 
   return (
     <div className="py-5">
-      <h1 className="display-5 fw-bold gradient-text text-center mb-4">Quiz Beat: Choose a K-pop Group!</h1>
+      <h1 className="display-5 fw-bold gradient-text text-center">Are you a true K-Pop fan?</h1>
       <p className="lead text-center mb-5">Test your knowledge and climb the leaderboard. You only get one shot per group!</p>
+      <QuizLeaderboard />
       {loading ? (
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "30vh" }}>
-          <div className="spinner-grow text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
         </div>
       ) : (
         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
@@ -48,7 +51,6 @@ export default function QuizIndex() {
           ))}
         </Row>
       )}
-      <QuizLeaderboard />
     </div>
   );
 }

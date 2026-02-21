@@ -19,13 +19,11 @@ export default function UserLayout() {
     };
 
     return (
-        <div className="d-flex flex-column min-vh-100">
+        <div className="user-theme-bg d-flex flex-column min-vh-100">
             <Navbar role="user" onClickLogout={handleLogout} />
-
-            <main className="container mt-4 flex-fill">
+            <main className="user-theme-main container mt-4 flex-fill">
                 <Outlet />
             </main>
-
             <Footer />
         </div>
     );

@@ -43,8 +43,8 @@ export default function QuizPlay() {
     return (
       <div className="text-center py-5">
         <h2 className="mb-4">Quiz Complete!</h2>
-        <h3 className="mb-3">Your Score: <span className="text-success">{score} / 10</span></h3>
-        <Button variant="primary" onClick={() => navigate("/user/quiz-index")}>Back to Quiz List</Button>
+        <h3 className="mb-5">Your Score: <span className="text-info">{score} / 10</span></h3>
+        <Button variant="primary" onClick={() => navigate("/user/quiz-index")}>Test Another Bias</Button>
       </div>
     );
 

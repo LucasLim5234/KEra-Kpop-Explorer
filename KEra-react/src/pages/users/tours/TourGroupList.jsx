@@ -14,14 +14,12 @@ export default function TourGroupList() {
     fetchConcertsByGroup(groupName).then(data => {
       let filtered = data;
       if (search) {
-        filtered = data.filter(concert =>
-          concert.name.toLowerCase().includes(search.toLowerCase())
-        );
+        filtered = data.filter(concert => concert.name.toLowerCase().includes(search.toLowerCase()));
       }
-      filtered.sort((a, b) => new Date(b.date) - new Date(a.date));
       setConcerts(filtered);
       setLoading(false);
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupName, search]);
 
   return (
@@ -30,7 +28,7 @@ export default function TourGroupList() {
         <h2 className="fw-bold gradient-text">{groupName} Concerts</h2>
         <p className="lead">Explore all upcoming shows and get your tickets now!</p>
       </div>
-      <InputGroup className="mb-5 w-75 mx-auto shadow-sm rounded-pill bg-white" style={{maxWidth:'500px'}}>
+      {/* <InputGroup className="mb-5 w-75 mx-auto shadow-sm rounded-pill bg-white" style={{maxWidth:'500px'}}>
         <Form.Control
           className="border-0 rounded-pill ps-4"
           placeholder="Search concerts..."
@@ -38,17 +36,16 @@ export default function TourGroupList() {
           onChange={e => setSearch(e.target.value)}
           style={{background:'transparent'}}
         />
-        <Button variant="pink" className="rounded-pill px-4" onClick={() => setSearch(search)}>
-          <i className="bi bi-search"></i> Search
-        </Button>
-      </InputGroup>
+      </InputGroup> */}
       {loading ? (
-        <div className="text-center py-5"><div className="spinner-border text-pink" role="status"></div></div>
-      ) : concerts.length === 0 ? (
-        <div className="text-center">No concerts found.</div>
+        <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "30vh" }}>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+        </div>
       ) : (
         <Row xs={1} sm={2} md={3} lg={4} className="g-4">
-          {concerts.map(concert => (
+          {concerts.map((concert) => (
             <Col key={concert.id}>
               <Card className="h-100 shadow-lg concert-card border-0 position-relative overflow-hidden" style={{ background: 'rgba(255,255,255,0.97)' }}>
                 <div className="concert-img-wrapper">
@@ -74,7 +71,6 @@ export default function TourGroupList() {
         </Row>
       )}
       <style>{`
-        .gradient-text { background: linear-gradient(90deg,#e83e8c,#6f42c1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
         .concert-img-wrapper { position:relative; height:220px; overflow:hidden; }
         .concert-img { object-fit:cover; width:100%; height:100%; transition:transform .3s; }
         .concert-card:hover .concert-img { transform:scale(1.08) rotate(-1deg); }

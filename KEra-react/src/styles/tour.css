@@ -1,3 +1,23 @@
+/* TourIndex themed styles */
+.tour-theme-container {
+  background: linear-gradient(135deg, #ff6ec7 0%, #8338ec 40%, #3a86ff 100%);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(80,0,120,0.12);
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+}
+.tour-theme-card {
+  border-radius: 1.5rem;
+  box-shadow: 0 4px 16px rgba(56,19,194,0.08), 0 0 0 4px #ff6fd822;
+  background: linear-gradient(120deg, #fff 60%, #f8e1ff 100%);
+  transition: transform 0.15s, box-shadow 0.15s;
+}
+.tour-theme-card:hover {
+  transform: translateY(-6px) scale(1.04) rotate(-1deg);
+  box-shadow: 0 8px 32px rgba(255,111,216,0.18), 0 0 0 6px #ff6fd8cc;
+  z-index: 2;
+}
 /* Custom styles for K-pop group and concert cards */
 .group-card:hover, .concert-card:hover {
   box-shadow: 0 0 16px 4px #e83e8c33;

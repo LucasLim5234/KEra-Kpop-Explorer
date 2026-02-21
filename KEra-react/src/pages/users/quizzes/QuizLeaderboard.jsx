@@ -21,10 +21,12 @@ export default function QuizLeaderboard() {
         <h3 className="mb-4 text-center">🏆 Quiz Beat Leaderboard</h3>
         {loading ? (
           <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "10vh" }}>
-            <div className="spinner-grow text-primary" role="status"></div>
+            <div className="spinner-grow m-2 text-primary" role="status"></div>
+            <div className="spinner-grow m-2 text-primary" role="status"></div>
+            <div className="spinner-grow m-2 text-primary" role="status"></div>
           </div>
         ) : (
-          <Table striped bordered hover responsive className="mb-0">
+          <Table striped bordered hover responsive className="mb-0 text-center">
             <thead>
               <tr>
                 <th>Rank</th>

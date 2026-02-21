@@ -1,3 +1,92 @@
+/* IdolIndex themed styles */
+.idol-theme-container {
+  background: linear-gradient(135deg, #ff6ec7 0%, #8338ec 40%, #ffffff 100%);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(80,0,120,0.12);
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+}
+.idol-theme-select {
+  border-radius: 1rem;
+  border: 1px solid #ff6ec7;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8338ec;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+.idol-theme-select:focus {
+  border-color: #3a86ff;
+}
+/* FanIndex themed styles */
+.fan-theme-container {
+  background: linear-gradient(135deg, #ff6ec7 0%, #8338ec 40%, #3a86ff 100%);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(80,0,120,0.12);
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
+}
+.fan-theme-select {
+  border-radius: 1rem;
+  border: 1px solid #ff6ec7;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #8338ec;
+  background: #fff;
+  transition: border-color 0.2s;
+}
+.fan-theme-select:focus {
+  border-color: #3a86ff;
+}
+/* Footer themed styles */
+.user-footer-theme {
+  background: linear-gradient(90deg, #ff6ec7 0%, #8338ec 60%, #3a86ff 100%);
+  color: #fff;
+  border-top: 2px solid #ff6ec7;
+  box-shadow: 0 -4px 16px rgba(131,56,236,0.08);
+}
+.footer-kpop {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-shadow: 0 0 8px #ff6ec7aa, 0 0 20px #8338ec88;
+}
+/* Navbar themed styles */
+.user-navbar-theme {
+  background: linear-gradient(90deg, #ff6ec7 0%, #8338ec 60%, #3a86ff 100%);
+  box-shadow: 0 4px 16px rgba(131,56,236,0.08);
+  border-bottom: 2px solid #ff6ec7;
+}
+.user-navbar-logo {
+  font-size: 2rem;
+  font-weight: 900;
+  color: #fff !important;
+  text-shadow: 0 0 8px #ff6ec7aa, 0 0 20px #8338ec88;
+  display: flex;
+  align-items: center;
+}
+.kpop-navbar-title {
+  font-family: 'Poppins', 'Montserrat', sans-serif;
+  font-size: 2rem;
+  font-weight: 900;
+  background: linear-gradient(45deg, #ffffff, #e9e9e9, #9d9d9d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: 0.5rem;
+}
+.user-navbar-link {
+  color: #fff !important;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.user-navbar-link:hover {
+  color: #ff6ec7 !important;
+  text-shadow: 0 0 8px #ff6ec7aa;
+}
 /* Kpop Idol Module Styles */
 .idol-index-container {
   max-width: 1100px;
@@ -10,13 +99,13 @@
 .idol-title {
   text-align: center;
   font-size: 2.7rem;
-  font-weight: 900;
+  font-weight: bold;
   letter-spacing: 2.5px;
-  background: linear-gradient(90deg, #ff6fd8 0%, #3813c2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  margin-bottom: 2.2rem;
-  text-shadow: 0 2px 12px #ff6fd855, 0 1px 0 #fff;
+  /* background: linear-gradient(90deg, #ff6fd8 0%, #3813c2 100%); */
+  /* -webkit-background-clip: text; */
+  /* -webkit-text-fill-color: #000000; */
+  /* margin-bottom: 2.2rem; */
+  /* text-shadow: 0 2px 12px #ff6fd855; */
   filter: brightness(1.1);
 }
 .idol-filters {
@@ -115,7 +204,7 @@
   text-align: center;
   font-size: 1.2rem;
   color: #3813c2;
-  margin: 2rem 0;
+  margin: 2rem;
 }
 
 /* Detail Page */
@@ -203,4 +292,19 @@
   .idol-index-container {
     padding: 1rem 0.2rem;
   }
+}
+
+/* UserLayout themed background and main styles */
+.user-theme-bg {
+  background: linear-gradient(135deg, #ff6ec7 0%, #8338ec 40%, #3a86ff 100%);
+  min-height: 100vh;
+  width: 100vw;
+}
+.user-theme-main {
+  background: rgba(255,255,255,0.12);
+  border-radius: 2rem;
+  box-shadow: 0 8px 32px rgba(80,0,120,0.12);
+  padding: 2rem 1rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(8px);
 }

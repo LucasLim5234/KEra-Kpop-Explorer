@@ -161,6 +161,64 @@
 .auth-card a:hover {
   text-decoration: underline;
 }
+/* Popup modal styles */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(58, 134, 255, 0.18);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.popup-card {
+  background: linear-gradient(135deg, #ff6ec7 0%, #8338ec 100%);
+  color: #fff;
+  border-radius: 1.2rem;
+  box-shadow: 0 8px 32px rgba(80,0,120,0.18);
+  padding: 2rem 2.5rem;
+  min-width: 320px;
+  max-width: 90vw;
+  text-align: center;
+  animation: popupFadeIn 0.3s;
+}
+.popup-message {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+  text-shadow: 0 0 8px rgba(255, 110, 199, 0.3);
+}
+.popup-close-btn {
+  background: #9900ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 0.7rem 2.2rem;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 2px 8px #8338ec44;
+  transition: background 0.2s;
+}
+.popup-close-btn:hover {
+  background: #ff6ec7;
+}
+.popup-error {
+  border: 2px solid #ff6ec7;
+}
+.popup-success {
+  border: 2px solid #3a86ff;
+}
+.popup-info {
+  border: 2px solid #8338ec;
+}
+@keyframes popupFadeIn {
+  from { opacity: 0; transform: scale(0.95); }
+  to { opacity: 1; transform: scale(1); }
+}
 
 /* Responsive adjustments */
 @media (max-width: 1024px) {

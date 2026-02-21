@@ -1,94 +1,126 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import PostCreationForm from "../../../components/PostCreationForm";
 import { readPost } from "../../../api/fan";
 import PostCard from "../../../components/PostCard";
 
 export default function FanIndex() {
-    const [postCategory, setPostCategory] = useState("all");
-    const [post, setPost] = useState([]);
-    const [openCommentPostId, setOpenCommentPostId] = useState(null);
-    const [openEditingPostId, setOpenEditingPostId] = useState(null);
-    const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
+  const [postCategory, setPostCategory] = useState("all");
+  const [post, setPost] = useState([]);
+  const [openCommentPostId, setOpenCommentPostId] = useState(null);
+  const [openEditingPostId, setOpenEditingPostId] = useState(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
 
-    const handlePostCategory = (e) => {
-        setPostCategory(e.target.value);
-    };
+  // handlePostCategory now works for both <select> and <input type="radio">
+  const handlePostCategory = (e) => {
+    setPostCategory(e.target.value);
+  };
 
-    const fetchPosts = async () => {
-        setLoading(true);
-        setError(false);
-        try {
-            const fetchedPosts = await readPost(postCategory);
-            setPost(fetchedPosts);
-        } catch (err) {
-            console.error("Post fetching failed: ", err);
-            setError(true);
-        } finally {
-            setLoading(false);
-        }
+  const fetchPosts = useCallback(async () => {
+    setLoading(true);
+    setError(false);
+    try {
+      const fetchedPosts = await readPost(postCategory);
+      setPost(fetchedPosts);
+    } catch (err) {
+      console.error("Post fetching failed: ", err);
+      setError(true);
+    } finally {
+      setLoading(false);
     }
+  }, [postCategory]);
 
-    const handlePostDeleted = (deletedPostId) => {
-        setPost(p => p.filter(i => i.id !== deletedPostId));
-    };
+  // Added the missing useEffect to actually trigger the fetch
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
-    useEffect(() => {
-        fetchPosts();
-    }, [postCategory]);
+  // Added the missing delete handler
+  const handlePostDeleted = (deletedId) => {
+    setPost((prev) => prev.filter((p) => p.id !== deletedId));
+  };
 
-    return (
-        <>
-            <div>
-                <PostCreationForm onDone={fetchPosts} />
-                <div className="mt-3">
-                    <input
-                        type="radio"
-                        id="all"
-                        name="post_category"
-                        value="all"
-                        checked={postCategory === "all"}
-                        onChange={handlePostCategory}
-                    />
-                    <label htmlFor="all" className="ms-1 me-3">
-                        All Posts
-                    </label>
+  return (
+    <div>
+      <h1 className="idol-title">K-Pop Fandom Without Borders</h1>
+      <p className="lead text-center mb-5">From Seoul to the world. Celebrating the global movement that turns strangers into a family!</p>
+      <PostCreationForm onDone={fetchPosts} />
+      {/* Header & Filters */}
+      <div className="d-flex align-items-center mt-5 mb-2 gap-3">
+        <select
+          className="form-select w-auto fan-theme-select"
+          value={postCategory}
+          onChange={handlePostCategory}
+        >
+          <option value="all">All Categories</option>
+          <option value="idol">Idol</option>
+          <option value="tour">Tour</option>
+        </select>
 
-                    <input
-                        type="radio"
-                        id="mine"
-                        name="post_category"
-                        value="mine"
-                        checked={postCategory === "mine"}
-                        onChange={handlePostCategory}
-                    />
-                    <label htmlFor="mine" className="ms-1">
-                        My Posts
-                    </label>
-                </div>
+        <div className="form-check mb-0">
+          <input
+            className="form-check-input"
+            type="checkbox"
+            id="mine"
+            value="mine"
+            checked={postCategory === "mine"}
+            onChange={(e) => setPostCategory(e.target.checked ? "mine" : "all")}
+          />
+          <label htmlFor="mine" className="form-check-label ms-1">
+            My Posts
+          </label>
+        </div>
+      </div>
 
-                {loading && <div className="d-flex justify-content-center align-items-center gap-3" style={{ minHeight: "60vh" }}>
-                    <div className="spinner-grow text-primary" role="status"></div>
-                    <div className="spinner-grow text-primary" role="status"></div>
-                    <div className="spinner-grow text-primary" role="status"></div>
-                </div>}
+      {/* Loading State */}
+      {loading && (
+        <div
+          className="d-flex justify-content-center align-items-center gap-3"
+          style={{ minHeight: "60vh" }}
+        >
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+          <div className="spinner-grow m-2 text-primary" role="status"></div>
+        </div>
+      )}
 
-                {error && <div className="d-flex flex-column justify-content-center align-items-center" style={{ minHeight: "60vh" }}>
-                    <p>Oops! Seems like fail to load posts</p>
-                    <button className="btn btn-primary" onClick={() => fetchPosts()}>
-                        Retry
-                    </button>
-                </div>}
+      {/* Error State */}
+      {error && !loading && (
+        <div
+          className="d-flex flex-column justify-content-center align-items-center"
+          style={{ minHeight: "60vh" }}
+        >
+          <p>Oops! Seems like we failed to load posts.</p>
+          <button className="btn btn-primary" onClick={fetchPosts}>
+            Retry
+          </button>
+        </div>
+      )}
 
-                {!loading && !error && (post.length === 0 ?
-                    <p>No post found</p> :
-                    <div>
-                        {post.map((p) => {
-                            return <PostCard key={p.id} post={p} openCommentPostId={openCommentPostId} setOpenCommentPostId={setOpenCommentPostId} openEditingPostId={openEditingPostId} setOpenEditingPostId={setOpenEditingPostId} onPostEdited={fetchPosts} onPostDeleted={handlePostDeleted} />
-                        })}
-                    </div>
-                )}
-            </div>
-        </>
-    );
+      {/* Empty State */}
+      {!loading && !error && post.length === 0 && (
+        <div className="text-center py-5">
+          <p className="text-muted">No posts found in this category.</p>
+        </div>
+      )}
+
+      {/* Post List */}
+      {!loading && !error && post.length > 0 && (
+        <div className="justify-content-center">
+          {post.map((p) => (
+            <PostCard
+              key={p.id}
+              post={p}
+              openCommentPostId={openCommentPostId}
+              setOpenCommentPostId={setOpenCommentPostId}
+              openEditingPostId={openEditingPostId}
+              setOpenEditingPostId={setOpenEditingPostId}
+              onPostEdited={fetchPosts}
+              onPostDeleted={handlePostDeleted}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
 }

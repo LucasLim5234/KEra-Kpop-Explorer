@@ -1,4 +1,4 @@
-import { FaRegHeart, FaRegComment, FaEdit } from "react-icons/fa";
+import { FaRegHeart, FaHeart, FaRegComment, FaEdit } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
 import { IoSend } from "react-icons/io5";
 import { formatDateWithDiff } from "../utils/formatDate";
@@ -102,80 +102,122 @@ export default function PostCard({ post, openCommentPostId, setOpenCommentPostId
     const parentComments = fetchedComments.filter(c => c.parent_id === null);
 
     return (
-        <>
-            <div className="card mt-3">
-                <div className="card-header">
-                    <div className="d-flex gap-5">
-                        <p>{post.user.name}</p>
-                        <small className="text-muted">
-                            {post.created_at !== post.updated_at && <span className="me-1">Edited</span>}
-                            {formatDateWithDiff(post.updated_at)}
-                        </small>
-                        {post.user_id === authUser.id &&
-                            <div className="d-flex">
-                                <button className="btn btn-light" onClick={handleIsEditingChange}><FaEdit style={{ color: "deepPink" }} /></button>
-                                <button className="btn btn-light" onClick={handleDeleteSubmit}><MdDelete style={{ color: "tomato" }} /></button>
+        <div className="w-100 mb-4">
+            <div className="card shadow-sm border-0 rounded-4 overflow-hidden">
+                {/* Header: User Info & Actions */}
+                <div className="card-header bg-white border-bottom-0 pt-3 px-3">
+                    <div className="d-flex justify-content-between align-items-center">
+                        <div className="d-flex align-items-center gap-2">
+                            <div className="bg-dark rounded-circle d-flex align-items-center justify-content-center text-white fw-bold" style={{ width: "35px", height: "35px", fontSize: "0.8rem" }}>
+                                {post.user.name.charAt(0).toUpperCase()}
                             </div>
-                        }
+                            <div>
+                                <h6 className="mb-0 fw-bold">{post.user.name}</h6>
+                                <small className="text-muted" style={{ fontSize: "0.75rem" }}>
+                                    {post.created_at !== post.updated_at && <span className="me-1 fw-bold text-primary">Edited •</span>}
+                                    {formatDateWithDiff(post.updated_at)}
+                                </small>
+                            </div>
+                        </div>
+
+                        {post.user_id === authUser.id && (
+                            <div className="dropdown">
+                                <button className="btn btn-light btn-sm rounded-pill" onClick={handleIsEditingChange}>
+                                    <FaEdit className="text-secondary" />
+                                </button>
+                                <button className="btn btn-light btn-sm rounded-pill ms-1" onClick={handleDeleteSubmit}>
+                                    <MdDelete className="text-danger" />
+                                </button>
+                            </div>
+                        )}
                     </div>
                 </div>
-                <div className="card-body">
-                    {openEditingPostId === post.id ?
-                        <form onSubmit={handleNewPostContentSubmit}>
-                            <input className="form-control" type="text" value={newPostContent} onChange={handleNewPostContentChange} required />
-                            <button className="form-control btn btn-primary">Save Changes</button>
-                        </form> :
-                        <p className="card-text">{post.content}</p>}
+
+                {/* Body: Content */}
+                <div className="card-body px-3 py-2">
+                    {openEditingPostId === post.id ? (
+                        <form onSubmit={handleNewPostContentSubmit} className="mt-2">
+                            <textarea 
+                                className="form-control rounded-3 mb-2" 
+                                rows="3"
+                                value={newPostContent} 
+                                onChange={handleNewPostContentChange} 
+                                required 
+                            />
+                            <div className="d-flex gap-2">
+                                <button type="submit" className="btn btn-dark btn-sm px-3 rounded-pill">Save</button>
+                                <button type="button" className="btn btn-light btn-sm px-3 rounded-pill" onClick={() => setOpenEditingPostId(null)}>Cancel</button>
+                            </div>
+                        </form>
+                    ) : (
+                        <p className="card-text fs-6 lh-base text-dark">{post.content}</p>
+                    )}
                 </div>
-                <div className="card-footer">
-                    <div className="d-flex gap-5">
-                        <button className="btn btn-light" onClick={handleLike}>
-                            <FaRegHeart style={{ color: liked ? "red" : "magenta" }} />
-                            {likeCount}
+
+                {/* Footer: Stats & Buttons */}
+                <div className="card-footer bg-white border-top-0 pb-3 px-3">
+                    <hr className="mt-0 mb-3 opacity-10" />
+                    <div className="d-flex gap-4">
+                        <button className="btn btn-link p-0 text-decoration-none d-flex align-items-center gap-2 transition-all" onClick={handleLike}>
+                            {liked ? <FaHeart className="text-danger fs-5" /> : <FaRegHeart className="text-dark opacity-50 fs-5" />}
+                            <span className={`fw-bold ${liked ? "text-danger" : "text-dark"}`}>{likeCount}</span>
                         </button>
-                        <button className="btn btn-light d-flex align-items-center gap-2" onClick={handleCommentClicked}>
-                            <FaRegComment style={{ color: "magenta" }} />
-                            <span>Comment</span>
+                        
+                        <button className="btn btn-link p-0 text-decoration-none d-flex align-items-center gap-2 text-dark opacity-75" onClick={handleCommentClicked}>
+                            <FaRegComment className="fs-5" />
+                            <span className="fw-bold">Comment</span>
                         </button>
                     </div>
                 </div>
             </div>
 
+            {/* Comments Section */}
             {openCommentPostId === post.id && (
-                <div className="mt-2 ms-5">
-                    <form onSubmit={handlePostCommentSubmit} className="mb-2">
-                        <div className="d-flex gap-2">
+                <div className="mt-2 ps-4 border-start border-2 ms-3 border-light">
+                    <form onSubmit={handlePostCommentSubmit} className="mb-3">
+                        <div className="input-group bg-white rounded-pill shadow-sm border px-2 py-1">
                             <input
-                                className="form-control"
+                                className="form-control border-0 bg-transparent shadow-none"
                                 value={comment}
                                 onChange={handleCommentChange}
                                 type="text"
-                                placeholder="Share your comment ..."
+                                placeholder="Write a comment..."
                                 autoFocus
                                 required
                             />
-                            <button type="submit"><IoSend style={{ color: "magenta" }} /></button>
+                            <button className="btn btn-link text-primary border-0" type="submit">
+                                <IoSend className="fs-5" style={{ color: "magenta" }} />
+                            </button>
                         </div>
-                        {error.content && <small className="text-danger">{error.content[0]}</small>}
+                        {error.content && <small className="text-danger ms-3 mt-1 d-block">{error.content[0]}</small>}
                     </form>
 
-                    {parentComments.length > 0 && <div className="mt-2 mb-1">Others' comments</div>}
-                    {parentComments.map(pc => (
-                        <CommentCard
-                            key={pc.id}
-                            postId={post.id}
-                            parentComment={pc}
-                            fetchedComments={fetchedComments}
-                            refreshComments={setFetchedComments}
-                            openReplyCommentId={openReplyCommentId}
-                            setOpenReplyCommentId={setOpenReplyCommentId}
-                            openEditingCommentId={openEditingCommentId}
-                            setOpenEditingCommentId={setOpenEditingCommentId}
-                        />
-                    ))}
+                    {parentComments.length > 0 && (
+                        <div className="mb-3">
+                            <span className="badge bg-light text-dark fw-normal rounded-pill px-3 py-2">
+                                {parentComments.length} {parentComments.length === 1 ? 'Comment' : 'Comments'}
+                            </span>
+                        </div>
+                    )}
+
+                    <div className="d-flex flex-column gap-3">
+                        {parentComments.map(pc => (
+                            <CommentCard
+                                key={pc.id}
+                                postId={post.id}
+                                parentComment={pc}
+                                fetchedComments={fetchedComments}
+                                refreshComments={setFetchedComments}
+                                openReplyCommentId={openReplyCommentId}
+                                setOpenReplyCommentId={setOpenReplyCommentId}
+                                openEditingCommentId={openEditingCommentId}
+                                setOpenEditingCommentId={setOpenEditingCommentId}
+                            />
+                        ))}
+                    </div>
                 </div>
             )}
-        </>
+        </div>
     );
 }
 
@@ -183,4 +225,8 @@ PostCard.propTypes = {
     post: PropTypes.object.isRequired,
     openCommentPostId: PropTypes.number,
     setOpenCommentPostId: PropTypes.func.isRequired,
+    openEditingPostId: PropTypes.number,
+    setOpenEditingPostId: PropTypes.func.isRequired,
+    onPostEdited: PropTypes.func.isRequired,
+    onPostDeleted: PropTypes.func.isRequired,
 };
