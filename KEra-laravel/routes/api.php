@@ -8,13 +8,6 @@ use App\Http\Controllers\IdolController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// Route::get('/user', function (Request $request) {
-//     return $request->user();
-// })->middleware('auth:sanctum');
-
-// Public Kpop Idol API
-
-
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/user', function (Request $request) {
         return $request->user();
@@ -25,8 +18,6 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('/comment', CommentController::class);
     Route::post('/like', [LikeController::class, 'toggle']);
     Route::apiResource('/tour', TourController::class);
-
-    // Quiz Beat
     Route::get('/quiz/idols', [\App\Http\Controllers\QuizController::class, 'idolList']);
     Route::get('/quiz/{idolId}', [\App\Http\Controllers\QuizController::class, 'getQuiz']);
     Route::post('/quiz/{idolId}', [\App\Http\Controllers\QuizController::class, 'submitQuiz']);

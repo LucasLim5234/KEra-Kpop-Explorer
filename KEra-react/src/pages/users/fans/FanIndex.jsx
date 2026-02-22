@@ -11,7 +11,6 @@ export default function FanIndex() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
 
-  // handlePostCategory now works for both <select> and <input type="radio">
   const handlePostCategory = (e) => {
     setPostCategory(e.target.value);
   };
@@ -30,12 +29,10 @@ export default function FanIndex() {
     }
   }, [postCategory]);
 
-  // Added the missing useEffect to actually trigger the fetch
   useEffect(() => {
     fetchPosts();
   }, [fetchPosts]);
 
-  // Added the missing delete handler
   const handlePostDeleted = (deletedId) => {
     setPost((prev) => prev.filter((p) => p.id !== deletedId));
   };
@@ -45,7 +42,6 @@ export default function FanIndex() {
       <h1 className="idol-title">K-Pop Fandom Without Borders</h1>
       <p className="lead text-center mb-5">From Seoul to the world. Celebrating the global movement that turns strangers into a family!</p>
       <PostCreationForm onDone={fetchPosts} />
-      {/* Header & Filters */}
       <div className="d-flex align-items-center mt-5 mb-2 gap-3">
         <select
           className="form-select w-auto fan-theme-select"
@@ -72,7 +68,6 @@ export default function FanIndex() {
         </div>
       </div>
 
-      {/* Loading State */}
       {loading && (
         <div
           className="d-flex justify-content-center align-items-center gap-3"
@@ -84,7 +79,6 @@ export default function FanIndex() {
         </div>
       )}
 
-      {/* Error State */}
       {error && !loading && (
         <div
           className="d-flex flex-column justify-content-center align-items-center"
@@ -97,14 +91,12 @@ export default function FanIndex() {
         </div>
       )}
 
-      {/* Empty State */}
       {!loading && !error && post.length === 0 && (
         <div className="text-center py-5">
           <p className="text-muted">No posts found in this category.</p>
         </div>
       )}
 
-      {/* Post List */}
       {!loading && !error && post.length > 0 && (
         <div className="justify-content-center">
           {post.map((p) => (

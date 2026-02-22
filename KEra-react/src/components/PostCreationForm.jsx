@@ -35,7 +35,6 @@ export default function PostCreationForm({ onDone }) {
                     {success}
                 </div>
             }
-            {/* <label className="form-label">Content: </label> */}
             <textarea className="form-control" name="content" value={formData.content} onChange={handleFormChange} placeholder="Share something about your favorite K-pop group ..." required></textarea>
             {error.content && <small className="text-danger">{error.content[0]}</small>}
             <button className="btn btn-primary w-100 mt-2">Post</button>

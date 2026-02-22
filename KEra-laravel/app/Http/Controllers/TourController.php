@@ -27,7 +27,6 @@ class TourController extends Controller
         $data = $response->json();
         $events = $data['_embedded']['events'] ?? [];
 
-        // Extract group name from event name (assume group name is before ' at ' or first word)
         $groups = collect($events)->map(function ($event) {
             $name = $event['name'] ?? '';
             $groupName = preg_split('/ at |\sLive|\sConcert|\sShow/i', $name)[0];
@@ -39,7 +38,6 @@ class TourController extends Controller
             ];
         })->unique('name')->values();
 
-        // If group param is set, return concerts for that group
         if ($group) {
             $concerts = collect($events)
                 ->filter(function ($event) use ($group) {
@@ -64,44 +62,11 @@ class TourController extends Controller
             return response()->json($concerts);
         }
 
-        // If search param, filter groups
         if ($search) {
             $groups = $groups->filter(function ($group) use ($search) {
                 return stripos($group['name'], $search) !== false;
             })->values();
         }
         return response()->json($groups);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

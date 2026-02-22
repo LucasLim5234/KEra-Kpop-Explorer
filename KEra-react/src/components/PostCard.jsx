@@ -104,7 +104,6 @@ export default function PostCard({ post, openCommentPostId, setOpenCommentPostId
     return (
         <div className="w-100 mb-4">
             <div className="card shadow-sm border-0 rounded-4 overflow-hidden">
-                {/* Header: User Info & Actions */}
                 <div className="card-header bg-white border-bottom-0 pt-3 px-3">
                     <div className="d-flex justify-content-between align-items-center">
                         <div className="d-flex align-items-center gap-2">
@@ -133,7 +132,6 @@ export default function PostCard({ post, openCommentPostId, setOpenCommentPostId
                     </div>
                 </div>
 
-                {/* Body: Content */}
                 <div className="card-body px-3 py-2">
                     {openEditingPostId === post.id ? (
                         <form onSubmit={handleNewPostContentSubmit} className="mt-2">
@@ -154,7 +152,6 @@ export default function PostCard({ post, openCommentPostId, setOpenCommentPostId
                     )}
                 </div>
 
-                {/* Footer: Stats & Buttons */}
                 <div className="card-footer bg-white border-top-0 pb-3 px-3">
                     <hr className="mt-0 mb-3 opacity-10" />
                     <div className="d-flex gap-4">
@@ -171,7 +168,6 @@ export default function PostCard({ post, openCommentPostId, setOpenCommentPostId
                 </div>
             </div>
 
-            {/* Comments Section */}
             {openCommentPostId === post.id && (
                 <div className="mt-2 ps-4 border-start border-2 ms-3 border-light">
                     <form onSubmit={handlePostCommentSubmit} className="mb-3">

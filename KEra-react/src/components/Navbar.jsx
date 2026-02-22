@@ -55,12 +55,6 @@ export default function Navbar({ role, onClickLogout }) {
                                 Idol Archive
                             </NavLink>
                         </li>
-                        {/* Admin does not need to do with World Tour as concerts are fetched from external API */}
-                        {/* <li className="nav-item mx-3">
-                            <NavLink className="nav-link" to="/user/world-tour">
-                                World Tour
-                            </NavLink>
-                        </li> */}
                         <li className="nav-item mx-3">
                             <NavLink className="nav-link user-navbar-link" to="/user/fan-index">
                                 Fan Zone

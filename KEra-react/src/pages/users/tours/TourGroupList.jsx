@@ -19,7 +19,6 @@ export default function TourGroupList() {
       setConcerts(filtered);
       setLoading(false);
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [groupName, search]);
 
   return (
@@ -28,15 +27,6 @@ export default function TourGroupList() {
         <h2 className="fw-bold gradient-text">{groupName} Concerts</h2>
         <p className="lead">Explore all upcoming shows and get your tickets now!</p>
       </div>
-      {/* <InputGroup className="mb-5 w-75 mx-auto shadow-sm rounded-pill bg-white" style={{maxWidth:'500px'}}>
-        <Form.Control
-          className="border-0 rounded-pill ps-4"
-          placeholder="Search concerts..."
-          value={search}
-          onChange={e => setSearch(e.target.value)}
-          style={{background:'transparent'}}
-        />
-      </InputGroup> */}
       {loading ? (
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "30vh" }}>
           <div className="spinner-grow m-2 text-primary" role="status"></div>

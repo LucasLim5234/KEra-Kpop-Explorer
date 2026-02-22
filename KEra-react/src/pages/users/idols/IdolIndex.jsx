@@ -23,7 +23,6 @@ export default function IdolIndex() {
   useEffect(() => {
     setLoading(true);
     fetchIdols();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [company, debutYear]);
 
   const handleClick = (id) => {

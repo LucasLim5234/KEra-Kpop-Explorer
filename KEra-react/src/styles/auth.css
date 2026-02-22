@@ -1,13 +1,10 @@
-/* Main container for side-by-side layout */
 .auth-container {
   display: flex;
   flex-direction: row;
   width: 100%;
   height: 100vh;
-  /* Full viewport height */
 }
 
-/* Left side: background image */
 .auth-left {
   flex: 1;
   position: relative;
@@ -19,7 +16,6 @@
   color: #fff;
 }
 
-/* Overlay effect for background dimming */
 .auth-left::before {
   content: "";
   position: absolute;
@@ -34,7 +30,6 @@
   z-index: 0;
 }
 
-/* Title and subtitle */
 .auth-left-text {
   position: relative;
   z-index: 1;
@@ -63,7 +58,6 @@
   animation: shimmer 4s infinite linear;
 }
 
-/* Shimmer animation for text */
 @keyframes shimmer {
   0% {
     background-position: -500% 0;
@@ -74,7 +68,6 @@
   }
 }
 
-/* Right side: gradient background for the form */
 .auth-right {
   flex: 1;
   display: flex;
@@ -87,7 +80,6 @@
   position: relative;
 }
 
-/* Form header styling */
 .auth-form-header {
   text-align: center;
   margin-bottom: 2rem;
@@ -103,7 +95,6 @@
   color: #f0e6ff;
 }
 
-/* Auth card with form content */
 .auth-card {
   width: 100%;
   max-width: 400px;
@@ -116,7 +107,6 @@
   transition: all 0.3s ease;
 }
 
-/* Input fields styling */
 .auth-card input {
   width: 100%;
   padding: 0.75rem 1rem;
@@ -133,7 +123,6 @@
   color: #c1c1c1;
 }
 
-/* Button styling */
 .auth-card button {
   width: 100%;
   padding: 0.75rem;
@@ -151,7 +140,6 @@
   font-weight: 700;
 }
 
-/* Links styling */
 .auth-card a {
   color: #f0e6ff;
   text-decoration: none;
@@ -161,7 +149,7 @@
 .auth-card a:hover {
   text-decoration: underline;
 }
-/* Popup modal styles */
+
 .popup-overlay {
   position: fixed;
   top: 0;
@@ -220,7 +208,6 @@
   to { opacity: 1; transform: scale(1); }
 }
 
-/* Responsive adjustments */
 @media (max-width: 1024px) {
   .auth-container {
     flex-direction: column;

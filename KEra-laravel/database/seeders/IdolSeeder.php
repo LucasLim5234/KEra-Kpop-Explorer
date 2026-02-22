@@ -12,7 +12,6 @@ class IdolSeeder extends Seeder
     {
         DB::table('idols')->truncate();
         DB::table('idols')->insert([
-            // 30 legit Kpop groups, each with a reliable image, members, discography, awards, fandom, etc.
             [
                 'name' => 'BTS',
                 'company' => 'HYBE (Big Hit Music)',

@@ -1,4 +1,3 @@
-/* TourIndex themed styles */
 .tour-theme-container {
   background: linear-gradient(135deg, #ff6ec7 0%, #8338ec 40%, #3a86ff 100%);
   border-radius: 2rem;
@@ -18,7 +17,6 @@
   box-shadow: 0 8px 32px rgba(255,111,216,0.18), 0 0 0 6px #ff6fd8cc;
   z-index: 2;
 }
-/* Custom styles for K-pop group and concert cards */
 .group-card:hover, .concert-card:hover {
   box-shadow: 0 0 16px 4px #e83e8c33;
   transform: translateY(-4px) scale(1.03);

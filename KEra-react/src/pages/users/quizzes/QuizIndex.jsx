@@ -19,7 +19,7 @@ export default function QuizIndex() {
   return (
     <div className="py-5">
       <h1 className="display-5 fw-bold gradient-text text-center">Are you a true K-Pop fan?</h1>
-      <p className="lead text-center mb-5">Test your knowledge and climb the leaderboard. You only get one shot per group!</p>
+      <p className="lead text-center mb-5">Test your knowledge and climb the leaderboard. You only get <i>one shot per group</i>!</p>
       <QuizLeaderboard />
       {loading ? (
         <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "30vh" }}>

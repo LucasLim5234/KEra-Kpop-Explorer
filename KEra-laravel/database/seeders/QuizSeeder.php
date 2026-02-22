@@ -34,7 +34,6 @@ class QuizSeeder extends Seeder
         $awards = is_array($idol->awards) ? $idol->awards : json_decode($idol->awards, true);
         $questions = [];
 
-        // 1. Debut year (unique)
         $questions[] = [
             'question' => "Which year did {$idol->name} debut?",
             'option_a' => $idol->debut_year - 1,
@@ -44,7 +43,6 @@ class QuizSeeder extends Seeder
             'answer' => 'B'
         ];
 
-        // 2. Fandom name (unique)
         $otherFandoms = array_filter(['ARMY','BLINK','ONCE','EXO-L','ReVeluv','CARAT','IGOT7','MooMoo','MONBEBE','NCTzen','MIDZY','STAY','MOA','ENGENE','DIVE','FEARNOT','Bunnies','SWITH','Treasure Makers','Fantasy','AROHA','THE B','ATINY','BUDDY','Orbit','PANDA','Shawol','ELF'], function($f) use ($idol) { return $f !== $idol->fandom_name; });
         shuffle($otherFandoms);
         $questions[] = [
@@ -56,7 +54,6 @@ class QuizSeeder extends Seeder
             'answer' => 'A'
         ];
 
-        // 3. Member not in group (unique)
         $otherMembers = array_filter(['Jungkook','Jisoo','Nayeon','Kai','Irene','S.Coups','JB','Solar','Shownu','Taeil','Yeji','Bang Chan','Soobin','Jungwon','Yujin','Sakura','Minji','Sumin','Hyunsuk','Youngbin','MJ','Sangyeon','Hongjoong','Sowon','HeeJin','Chorong','Onew','Leeteuk'], function($m) use ($members) { return !in_array($m, $members); });
         shuffle($otherMembers);
         $questions[] = [
@@ -68,7 +65,6 @@ class QuizSeeder extends Seeder
             'answer' => 'D'
         ];
 
-        // 4. Album (unique)
         $otherAlbums = array_filter(['Wings','The Album','Twicetagram','XOXO','Perfect Velvet','Love&Letter','Flight Log: Turbulence','Melting','Fatal Love','Limitless','It’z Me','Clé 1: Miroh','The Dream Chapter: STAR','BORDER: DAY ONE','ELEVEN','FEARLESS','New Jeans','Star To A Young Culture','THE FIRST STEP: CHAPTER ONE','Feeling Sensation','Spring Up','The First','TREASURE EP.1','Season of Glass','+ +','Seven Springs of Apink','The SHINee World','Sorry, Sorry'], function($a) use ($discography) { return !in_array($a, $discography); });
         shuffle($otherAlbums);
         $questions[] = [
@@ -80,7 +76,6 @@ class QuizSeeder extends Seeder
             'answer' => 'A'
         ];
 
-        // 5. Award not won (unique)
         $otherAwards = array_filter(['Grammy Award','MTV Video Music Awards','Asia Artist Awards','Melon Music Awards','Billboard Music Awards','American Music Awards','Seoul Music Awards','Golden Disc Awards','Mnet Asian Music Awards'], function($a) use ($awards) { return !in_array($a, $awards); });
         shuffle($otherAwards);
         $questions[] = [
@@ -92,7 +87,6 @@ class QuizSeeder extends Seeder
             'answer' => 'C'
         ];
 
-        // 6. Company (unique)
         $companies = array_filter(['HYBE (Big Hit Music)','YG Entertainment','JYP Entertainment','SM Entertainment','Pledis Entertainment','RBW','Starship Entertainment','FNC Entertainment','Fantagio','IST Entertainment','KQ Entertainment','Source Music','Blockberry Creative','High Up Entertainment','BELIFT LAB (HYBE)','ADOR (HYBE)'], function($c) use ($idol) { return $c !== $idol->company; });
         shuffle($companies);
         $questions[] = [
@@ -104,7 +98,6 @@ class QuizSeeder extends Seeder
             'answer' => 'A'
         ];
 
-        // 7. Description fact (unique)
         $otherDescs = ['A group known for their rock music.','A solo artist with jazz influences.','A duo famous for ballads.'];
         $questions[] = [
             'question' => "Which statement best describes {$idol->name}?",
@@ -115,7 +108,6 @@ class QuizSeeder extends Seeder
             'answer' => 'A'
         ];
 
-        // 8. Album released year (unique)
         $albumYear = $idol->debut_year + 1;
         $questions[] = [
             'question' => "Which year was {$discography[0]} released by {$idol->name}?",
@@ -126,7 +118,6 @@ class QuizSeeder extends Seeder
             'answer' => 'A'
         ];
 
-        // 9. Member (unique)
         shuffle($otherMembers);
         $questions[] = [
             'question' => "Who is a member of {$idol->name}?",
@@ -137,7 +128,6 @@ class QuizSeeder extends Seeder
             'answer' => 'A'
         ];
 
-        // 10. Fandom name (unique, different from Q2)
         shuffle($otherFandoms);
         $questions[] = [
             'question' => "Which is the official fandom name of {$idol->name}?",

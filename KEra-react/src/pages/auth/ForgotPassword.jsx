@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { csrf, forgotPassword } from "../../api/auth";
 import { Link } from "react-router-dom";
+import Popup from "../../components/Popup";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState("");

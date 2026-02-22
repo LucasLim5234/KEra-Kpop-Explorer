@@ -10,7 +10,6 @@ use App\Models\User;
 
 class QuizController extends Controller
 {
-    // List all idols with quiz status for the user
     public function idolList(Request $request)
     {
         $user = $request->user();
@@ -23,7 +22,6 @@ class QuizController extends Controller
         return response()->json($idols);
     }
 
-    // Get 10 quiz questions for a group
     public function getQuiz(Request $request, $idolId)
     {
         $user = $request->user();
@@ -35,7 +33,6 @@ class QuizController extends Controller
         return response()->json($questions);
     }
 
-    // Submit answers and auto-grade
     public function submitQuiz(Request $request, $idolId)
     {
         $user = $request->user();
@@ -63,7 +60,6 @@ class QuizController extends Controller
         return response()->json(['score' => $score]);
     }
 
-    // Leaderboard for all users
     public function leaderboard(Request $request)
     {
         $user = $request->user();
