@@ -73,7 +73,7 @@ The backend exposes a RESTful API for public consumption. Example endpoints:
 3. `npm run dev`
 
 ## Contributing
-Contributions are welcome! Please open issues or submit pull requests for new features, bug fixes, or improvements. See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+Contributions are welcome! Please open issues or submit pull requests for new features, bug fixes, or improvements. 
 
 ## License
-This project is licensed under the MIT License. See [LICENSE](LICENSE) for details.
+This project is licensed under the MIT License.
